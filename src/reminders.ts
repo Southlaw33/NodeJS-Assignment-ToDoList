@@ -38,7 +38,8 @@ const reminderDB = new ReminderDatabase();
 reminderDB.createReminder("1", "Meeting", "Team meeting at 10 AM", new Date("2025-03-11"));
 reminderDB.createReminder("2", "Appointment with the doctor", "Meet dr.varun tomorrow", new Date("2025-03-11"));
 console.log(reminderDB.getAllReminders());
-console.log(reminderDB.exists("1"));
+
 console.log(reminderDB.getReminder("1"));
 reminderDB.removeReminder("1");
 console.log(reminderDB.getAllReminders());
+console.log(reminderDB.exists("1"));
