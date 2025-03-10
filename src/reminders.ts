@@ -19,6 +19,7 @@ class ReminderDatabase {
         return this.reminders;
     }
     getReminder(id: string): Reminder | null {
+        console.log("reminder found");
         return this.reminders.find(reminder => reminder.id === id) || null;
     }
     removeReminder(id: string): void {
@@ -35,8 +36,8 @@ class ReminderDatabase {
 }
 // Example usage:
 const reminderDB = new ReminderDatabase();
-reminderDB.createReminder("1", "Meeting", "Team meeting at 10 AM", new Date("2025-03-11"));
-reminderDB.createReminder("2", "Appointment with the doctor", "Meet dr.varun tomorrow", new Date("2025-03-11"));
+reminderDB.createReminder("1", "Meeting", "Team meeting at 10 AM", new Date("2025-03-11T10:00:00"));
+reminderDB.createReminder("2", "Appointment with the doctor", "Meet dr.varun tomorrow", new Date("2025-03-11T13:00:00"));
 console.log(reminderDB.getAllReminders());
 
 console.log(reminderDB.getReminder("1"));
