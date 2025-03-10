@@ -4,7 +4,8 @@
   "description": "NodeJS Playground - This is to explore NodeJS",
   "main": "index.js",
   "scripts": {
-    "start": "npx ts-node src/reminders.ts"
+    "start": "npx ts-node src/reminders.ts",
+    "dev" : "npx ts-node src/index.ts"
   },
   "author": "Atchutha",
   "license": "MIT",
