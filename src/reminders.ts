@@ -39,6 +39,14 @@ class ReminderDataBase{
 
         }   
     }
+    removeExpiredReminders(){
+        const now = new Date();
+        this.reminders.forEach((rem, id) => {
+            if(rem.date < now){
+                this.reminders.delete(id);
+            }
+        });
+    }
 }
 
 export default ReminderDataBase;
