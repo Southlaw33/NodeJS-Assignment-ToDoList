@@ -40,14 +40,32 @@ class ReminderDataBase{
 
         }   
     }
-    removeExpiredReminders(){
-        const now = new Date();
-        this.reminders.forEach((rem, id) => {
-            if(rem.date < now){
-                this.reminders.delete(id);
-            }
-        });
+
+    getAllRemindersDueByToday(): reminder[] | null {
+        const today = new Date();
+        const reminders = this.getAllReminders();
+        if (reminders) {
+            return reminders.filter(rem => rem.date.getDate() === today.getDate());
+        }
+        return null;
     }
+
+    getAllRemindersMarkedAsCompleted(): reminder[] | null {
+        const reminders = this.getAllReminders();
+        if (reminders) {
+            return reminders.filter(rem => rem.completed);
+        }
+        return null;
+    }
+    getAllRemindersNotMarkedAsCompleted(): reminder[] | null {
+        const reminders = this.getAllReminders();
+        if (reminders) {
+            return reminders.filter(rem => !rem.completed);
+        }
+        return null;
+    }
+
+
     exists(id: string): boolean{
         return this.reminders.has(id);
     }
