@@ -1,8 +1,8 @@
-Todo App
+TODO APP
 
 A simple command-line Todo App for managing reminders using Node.js.
 
-Features
+Features:
 
 View all reminders
 
