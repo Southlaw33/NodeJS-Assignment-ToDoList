@@ -1,43 +1,55 @@
 import ReminderDataBase from "./reminders";
+import * as readline from "readline-sync"; // Import readline-sync for user input
 
 const rdb = new ReminderDataBase();
 
-// Create reminders and store their IDs
+
 rdb.createReminder("Buy Milk", new Date("2021-10-10"));
 rdb.createReminder("Buy Bread", new Date("2021-10-11"));
 rdb.createReminder("Visit the doctor", new Date("2025-03-12"));
 rdb.createReminder("Deadline to finish the NodeJS assignment", new Date("2025-03-14"));
 
-console.log("All reminders after creation:");
-const allReminders = rdb.getAllReminders() || []; 
+
+console.log("\nAll reminders after creation:");
+const allReminders = rdb.getAllReminders() || [];
 console.log(allReminders);
 
-// Extract generated IDs
+//displaying the reminder IDs
 const reminderIds = allReminders.map(rem => rem.id.toString());
+console.log("\nAvailable Reminder IDs: ", reminderIds);
 
-// Get a specific reminder (first one)
-if (reminderIds.length > 0) {
-    const firstId = reminderIds[0];
-    console.log(`Reminder with ID ${firstId}:`, rdb.getReminder(firstId));
+//getting the user input for the reminder ID
+const getId = readline.question("Enter the ID of the reminder you want to view: ");
+const reminder = rdb.getReminder(getId);
+if (reminder) {
+    console.log(`Reminder with ID ${getId}:`, reminder);
+} else {
+    console.log("Reminder not found.");
 }
 
-// pdating a reminder (second one)
-if (reminderIds.length > 1) {
-    const updateId = reminderIds[1];
-    rdb.updateReminder(updateId, "Updated Title", new Date("2025-04-01"));
-    console.log(`Reminder after update (ID: ${updateId}):`, rdb.getReminder(updateId));
+// Updating the reminder based on the ID
+const updateId = readline.question("Enter the ID of the reminder you want to update: ");
+if (rdb.getReminder(updateId)) {
+    const newTitle = readline.question("Enter the new title: ");
+    const newDateInput = readline.question("Enter the new date (YYYY-MM-DD): ");
+    const newDate = new Date(newDateInput);
+    rdb.updateReminder(updateId, newTitle, newDate);
+    console.log(`Reminder updated (ID: ${updateId}):`, rdb.getReminder(updateId));
+} else {
+    console.log("Reminder not found.");
 }
 
-// removing a specific reminder (in this case, the third one)
-if (reminderIds.length > 2) {
-    const removeId = reminderIds[2];
+// Remove a reminder using its ID
+const removeId = readline.question("Enter the ID of the reminder you want to remove: ");
+if (rdb.getReminder(removeId)) {
     rdb.removeReminder(removeId);
-    console.log(`Remaining reminders after removing ID ${removeId}:`);
-    console.log(rdb.getAllReminders());
+    console.log(`Reminder with ID ${removeId} removed.`);
+} else {
+    console.log("Reminder not found.");
 }
 
-// removing the expired reminders
-console.log("Removing expired reminders...");
+// Remove expired reminders
+console.log("\nRemoving expired reminders...");
 rdb.removeExpiredReminders();
 console.log("All reminders after removing expired ones:");
 console.log(rdb.getAllReminders());
