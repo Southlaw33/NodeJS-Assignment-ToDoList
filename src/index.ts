@@ -7,7 +7,11 @@ const rdb = new ReminderDataBase();
 rdb.createReminder("Buy Milk", new Date("2021-10-10"));
 rdb.createReminder("Buy Bread", new Date("2021-10-11"));
 rdb.createReminder("Visit the doctor", new Date("2025-03-12"));
-rdb.createReminder("Deadline to finish the NodeJS assignment", new Date("2025-03-14"));
+rdb.createReminder("Deadline to finish the NodeJS assignment", new Date("2025-03-11"));
+
+
+
+
 
 
 console.log("\nAll reminders after creation:");
@@ -17,6 +21,33 @@ console.log(allReminders);
 //displaying the reminder IDs
 const reminderIds = allReminders.map(rem => rem.id.toString());
 console.log("\nAvailable Reminder IDs: ", reminderIds);
+
+// Marking reminders as completed
+let iD = readline.question("Enter the ID of the reminder you want to mark as completed: ");
+if (rdb.getReminder(iD)) {
+    rdb.markReminderAsCompleted(iD);
+    console.log(`Reminder with ID ${iD} marked as completed.`);
+}
+
+iD = readline.question("Enter the ID of the reminder you want to mark as completed: ");
+if (rdb.getReminder(iD)) {
+    rdb.markReminderAsCompleted(iD);
+    console.log(`Reminder with ID ${iD} marked as completed.`);
+}
+
+//unmarking the reminder as completed
+iD = readline.question("Enter the ID of the reminder you want to mark as completed: ");
+if (rdb.getReminder(iD)) {
+    rdb.unmarkReminderAsCompleted(iD);
+    console.log(`Reminder with ID ${iD} marked as completed.`);
+}
+
+iD = readline.question("Enter the ID of the reminder you want to mark as completed: ");
+if (rdb.getReminder(iD)) {
+    rdb.unmarkReminderAsCompleted(iD);
+    console.log(`Reminder with ID ${iD} marked as completed.`);
+}
+
 
 //getting the user input for the reminder ID
 const getId = readline.question("Enter the ID of the reminder you want to view: ");

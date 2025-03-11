@@ -2,6 +2,7 @@ class reminder{
     id: number;
     title: string;
     date: Date;
+    completed: boolean = false;
     constructor(id: number, title: string, date: Date){
         this.id = id;
         this.title = title;
@@ -50,6 +51,21 @@ class ReminderDataBase{
     exists(id: string): boolean{
         return this.reminders.has(id);
     }
+    markReminderAsCompleted(id: string){
+        const rem = this.reminders.get(id);
+        if(rem){
+            rem.completed = true;
+            this.reminders.set(id, rem);
+        }
+    }
+    unmarkReminderAsCompleted(id: string){
+        const rem = this.reminders.get(id);
+        if(rem){
+            rem.completed = false;
+            this.reminders.set(id, rem);
+        }
+    }
+     
 }
 
 export default ReminderDataBase;
