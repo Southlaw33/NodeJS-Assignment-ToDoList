@@ -47,6 +47,9 @@ class ReminderDataBase{
             }
         });
     }
+    exists(id: string): boolean{
+        return this.reminders.has(id);
+    }
 }
 
 export default ReminderDataBase;
